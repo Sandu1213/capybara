@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 require 'capybara'
+require 'capybara/rspec/matcher_proxies'
 
 module Capybara
   module DSL
     def self.included(base)
       warn "including Capybara::DSL in the global scope is not recommended!" if base == Object
+
+      if defined?(::RSpec::Matchers) && base.include?(::RSpec::Matchers)
+        base.send(:include, ::Capybara::RSpecMatcherProxies)
+      end
+
       super
     end
 

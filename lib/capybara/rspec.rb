@@ -22,6 +22,7 @@ RSpec.configure do |config|
       Capybara.use_default_driver
     end
   end
+
   config.before do
     if self.class.include?(Capybara::DSL)
       example = fetch_current_example.call(self)
